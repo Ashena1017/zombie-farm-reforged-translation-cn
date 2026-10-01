@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 Zombie Farm Reforged 纯汉化 contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+第三方内容说明 / Third-party notices
+
+1. 本仓库是网页游戏 "Zombie Farm Reforged" 的非官方汉化衍生作品，与游戏原作者及
+   Zombie Farm 2 Reforged 上游工程维护者无隶属关系。
+
+2. 上游工程 https://github.com/actualdoctornerd-ai/Zombie-Farm-2-Reforged 采用 MIT
+   许可证发布，本项目的用户脚本在形式上与其保持一致。
+
+3. 汉化词库以原版游戏官方简体中文语言包为参考并作了校订，仅用于本项目对上述游戏
+   界面的翻译。游戏名称、商标、美术素材、文本及原版语言包归其各自权利人所有，
+   不在本许可证的授权范围内。
+
+4. 本仓库不包含游戏本体、上游源码或其构建产物。
