@@ -1,4 +1,4 @@
-# Zombie Farm Reforged 纯汉化
+# Zombie Farm Reforged 汉化
 
 把网页游戏 [Zombie Farm Reforged](https://zombiefarmreforged.com/) 的界面翻译成简体中文的 Tampermonkey 用户脚本。
 
