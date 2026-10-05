@@ -2,7 +2,7 @@
 
 把网页游戏 [Zombie Farm Reforged](https://zombiefarmreforged.com/) 的界面翻译成简体中文的 Tampermonkey 用户脚本。
 
-**当前版本：1.1.2**
+**当前版本：1.1.3**
 
 装上它，游戏里的英文就都变成中文了：菜单、提示、倒计时、战斗文字、道具说明，连画在画布上的字也会翻译。
 词库整个装在脚本里，不联网、不调用翻译服务，也不碰你的账号和存档。
@@ -33,9 +33,9 @@
 ### 电脑：Edge + Tampermonkey
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 扩展。
-2. 从本仓库 [Releases](../../releases) 下载 `ZFR在线网页版-纯汉化脚本.zip`。
+2. 从本仓库 [Releases](../../releases) 下载 `ZFR在线网页版-汉化脚本.zip`。
 3. 打开 Tampermonkey 管理面板 → **实用工具** → 在「导入」处选择该 ZIP，确认导入其中的用户脚本。
-4. 确认「Zombie Farm Reforged 纯汉化」已启用，然后打开或刷新 <https://zombiefarmreforged.com/>。
+4. 确认「Zombie Farm Reforged 汉化」已启用，然后打开或刷新 <https://zombiefarmreforged.com/>。
 
 也可以直接把 `zombie-farm-translation.user.js` 拖进浏览器安装，或在 Tampermonkey 里新建脚本后粘贴其内容。
 脚本使用页面上下文（`@sandbox raw`），请使用支持该注入方式的新版 Tampermonkey。
@@ -80,7 +80,7 @@
 | --- | --- |
 | `dist/zombie-farm-translation.user.js` | 用户脚本本体，可直接安装 |
 | `dist/翻译脚本使用指南.html` | 图文使用指南，图片已内嵌，可离线阅读 |
-| `dist/ZFR在线网页版-纯汉化脚本.zip` | 脚本 + 指南打包，推荐用 Tampermonkey 导入 |
+| `dist/ZFR在线网页版-汉化脚本.zip` | 脚本 + 指南打包，推荐用 Tampermonkey 导入 |
 
 三个文件内容同源，均随版本一并更新。
 

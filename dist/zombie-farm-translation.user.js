@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Zombie Farm Reforged 纯汉化
+// @name         Zombie Farm Reforged 汉化
 // @namespace    local.zombie-farm.translation-only
-// @version      1.1.2
+// @version      1.1.3
 // @description  把 Zombie Farm Reforged 的游戏界面翻译成简体中文。
 // @match        https://zombiefarmreforged.com/*
 // @match        https://www.zombiefarmreforged.com/*
@@ -15,7 +15,7 @@
   "use strict";
 
   const KEY = "__ZF_TRANSLATION_ONLY__";
-  const VERSION = "1.1.2";
+  const VERSION = "1.1.3";
   if (window.top !== window.self || window[KEY]) return;
 
   const apps = [];
