@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zombie Farm Reforged 纯汉化
 // @namespace    local.zombie-farm.translation-only
-// @version      1.1.1
+// @version      1.1.2
 // @description  把 Zombie Farm Reforged 的游戏界面翻译成简体中文。
 // @match        https://zombiefarmreforged.com/*
 // @match        https://www.zombiefarmreforged.com/*
@@ -15,7 +15,7 @@
   "use strict";
 
   const KEY = "__ZF_TRANSLATION_ONLY__";
-  const VERSION = "1.1.1";
+  const VERSION = "1.1.2";
   if (window.top !== window.self || window[KEY]) return;
 
   const apps = [];
@@ -166,10 +166,19 @@
       // Reward messages combine catalog names with optional quantity suffixes.
       // Resolve only known terms so player names and unknown text stay intact.
       const quantityTerm = (part) => {
-        const match = /^(.*?)\s+([×x]\s*\d+)$/.exec(normalized(part));
-        if (!match) return undefined;
-        const name = dictionary.get(match[1]) ?? folded.get(match[1].toLowerCase());
-        return name === undefined ? undefined : `${name} ${match[2]}`;
+        const text = normalized(part);
+        const match = /^(.*?)\s+([×x]\s*\d+)$/.exec(text);
+        if (match) {
+          const name = dictionary.get(match[1]) ?? folded.get(match[1].toLowerCase());
+          return name === undefined ? undefined : `${name} ${match[2]}`;
+        }
+        // describeStoredSale()/receivedSaleLots() put the count first:
+        // `3 × Pixel Floating Block`. Resolve that shape too, but only when the
+        // name itself is known, so an unknown player-supplied string stays intact.
+        const leading = /^(\d+)\s*[×x]\s*(.+)$/.exec(text);
+        if (!leading) return undefined;
+        const name = dictionary.get(leading[2]) ?? folded.get(leading[2].toLowerCase());
+        return name === undefined ? undefined : `${leading[1]} × ${name}`;
       };
       const quantified = quantityTerm(value);
       if (quantified !== undefined) return quantified;
