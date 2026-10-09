@@ -1,9 +1,9 @@
+# 其余文本文件统一用 LF 存储
+* text=auto eol=lf
+
 # 发布产物必须逐字节与构建输出一致：
 # 本机 system 级 core.autocrlf=true 会在检出时把换行改写成 CRLF，
 # 那会改变 .user.js / .html 的字节内容、并让 ZIP 内的条目与磁盘文件不再相同。
 # 因此 dist/ 下全部按二进制处理，不做任何换行或编码转换。
 dist/* -text -diff
 *.zip   -text -diff
-
-# 其余文本文件统一用 LF 存储
-* text=auto eol=lf
