@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zombie Farm Reforged 汉化
 // @namespace    local.zombie-farm.translation-only
-// @version      1.1.6
+// @version      1.1.7
 // @description  把 Zombie Farm Reforged 的游戏界面翻译成简体中文。
 // @match        https://zombiefarmreforged.com/*
 // @match        https://www.zombiefarmreforged.com/*
@@ -15,7 +15,7 @@
   "use strict";
 
   const KEY = "__ZF_TRANSLATION_ONLY__";
-  const VERSION = "1.1.6";
+  const VERSION = "1.1.7";
   if (window.top !== window.self || window[KEY]) return;
 
   const apps = [];
@@ -50,7 +50,11 @@
     // </b>"), so a bare child selector swallowed the verdict with it and VICTORY /
     // REPELLED / DEFENSE LOST / DEFENSE HELD could never be translated. Only the verdict
     // is excepted, by its own class; every other <b> in the row stays user data.
-    const excluded = "script,style,pre,code,textarea,[contenteditable]:not([contenteditable=false]),[data-zf-locale-ui],.fr-gsi,.nameplate,.vb-name,.fr-friend-name,.prof-name:not(.fr-inbox-row > .prof-name),.fr-inbox-row .prof-name b,.fr-who b,.fr-code,.lb-name:not(.lb-self > .lb-name),.army-nm,.revive-name,.pvp-role-name,.pvp-row .zteam-nm > b:not(.pvp-verdict),.memorial-name,.zcard-board.renameable,.zr-card:not(.alm-card) .zr-name,.set-acct-who b,.fr-confirm-bg .confirm-msg b,.cmb-sn,.cmb-zn";
+    // `.vb-name` is deliberately NOT excluded: the visit banner composes
+    // "<player name>'s farm" at render time, and the "{0}'s farm" template keeps
+    // the captured name verbatim while translating the possessive tail. Excluding
+    // the whole node left the banner reading "正在参观 柯秋灵's farm".
+    const excluded = "script,style,pre,code,textarea,[contenteditable]:not([contenteditable=false]),[data-zf-locale-ui],.fr-gsi,.nameplate,.fr-friend-name,.prof-name:not(.fr-inbox-row > .prof-name),.fr-inbox-row .prof-name b,.fr-who b,.fr-code,.lb-name:not(.lb-self > .lb-name),.army-nm,.revive-name,.pvp-role-name,.pvp-row .zteam-nm > b:not(.pvp-verdict),.memorial-name,.zcard-board.renameable,.zr-card:not(.alm-card) .zr-name,.set-acct-who b,.fr-confirm-bg .confirm-msg b,.cmb-sn,.cmb-zn";
     const attributes = ["title", "aria-label", "placeholder", "alt"];
     const originals = new WeakMap();
     const attrOriginals = new WeakMap();
