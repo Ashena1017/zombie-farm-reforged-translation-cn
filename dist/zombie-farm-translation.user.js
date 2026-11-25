@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zombie Farm Reforged 汉化
 // @namespace    local.zombie-farm.translation-only
-// @version      1.2.21
+// @version      1.2.22
 // @description  本项目开源免费，请勿购买。把 Zombie Farm Reforged 的游戏界面翻译成简体中文。交流 QQ 群：1185712984。
 // @homepageURL  https://github.com/Ashena1017/zombie-farm-reforged-translation-cn
 // @match        https://zombiefarmreforged.com/*
@@ -21,7 +21,7 @@
   "use strict";
 
   const KEY = "__ZF_TRANSLATION_ONLY__";
-  const VERSION = "1.2.21";
+  const VERSION = "1.2.22";
   if (window.top !== window.self || window[KEY]) return;
 
   const apps = [];
@@ -321,7 +321,14 @@
       return value.split(/( · )/).map((part, i) => i % 2 ? part : translateTerm(part, 0)).join("");
     }
 
-    function translateDisplay(value, el) {
+    function translateDisplay(value, el, attr) {
+      if (attr === "title" && el.matches(".zteam-pip:not(.gone)")) {
+        const suffix = " (resting in the Mausoleum)";
+        if (el.classList.contains("resting") && value.endsWith(suffix)) {
+          return translate("{0}" + suffix).replace("{0}", () => value.slice(0, -suffix.length));
+        }
+        return value;
+      }
       if (el.matches(".lb-self > .lb-name")) return normalized(value) === "You" ? translate(value) : value;
       if (el.matches(".endless-lb-unit-details > strong")) {
         return translate(LOCALE_DATA.speciesNames?.[normalized(value)] ?? value);
@@ -412,7 +419,7 @@
         if (value === null) { records?.delete(attr); continue; }
         const previous = records?.get(attr);
         const source = previous && value === previous.rendered ? previous.source : value;
-        const rendered = enabled ? translateDisplay(source, el) : source;
+        const rendered = enabled ? translateDisplay(source, el, attr) : source;
         if (rendered === source) records?.delete(attr);
         else {
           if (!records) attrOriginals.set(el, records = new Map());
@@ -625,7 +632,12 @@
       document.querySelectorAll(roots).forEach(scan);
       updateSearches(); scanPixi();
       interval = setInterval(() => { scanPixi(); updateSearches(); }, 700);
-      window.addEventListener("pagehide", () => { observer.disconnect(); clearInterval(interval); }, { once: true });
+      window.addEventListener("pagehide", event => {
+        // A cached document resumes its existing observer and timer when the browser thaws it.
+        if (event.persisted) return;
+        observer.disconnect();
+        clearInterval(interval);
+      });
     }
     return { originalText, translate, setEnabled, start, status: () => ({ enabled, writes, scans, faults, pixiNodes: pixiNodes.size, searchBoxes: searchBoxes.size }) };
   }
