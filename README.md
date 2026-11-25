@@ -2,7 +2,7 @@
 
 把网页游戏 [Zombie Farm Reforged](https://zombiefarmreforged.com/) 的界面翻译成简体中文的 Tampermonkey 用户脚本。
 
-**当前版本：1.2.22**
+**[安装最新版汉化](https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js)** · 当前公开版本 **1.2.23**
 
 **本项目开源免费，请勿购买。**
 
@@ -41,9 +41,10 @@
 ### 电脑：Edge + Tampermonkey
 
 1. 安装 [Tampermonkey](https://www.tampermonkey.net/) 扩展。
-2. 从本仓库 [Releases](../../releases) 下载 ZIP 安装包。
-3. 打开 Tampermonkey 管理面板 → **实用工具** → 在「导入」处选择该 ZIP，确认导入其中的用户脚本。
-4. 确认「Zombie Farm Reforged 汉化」已启用，然后打开或刷新 <https://zombiefarmreforged.com/>。
+2. 点 **[安装最新版汉化](https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js)**，在油猴打开的页面确认安装。
+3. 确认「Zombie Farm Reforged 汉化」已启用，然后打开或刷新 <https://zombiefarmreforged.com/>。
+
+如需离线安装，在最新发布的附件中下载文件名以 `zombie-farm-translation-only-v` 开头的 ZIP，然后到油猴管理面板 → **实用工具 → 从 ZIP 导入**，选择该文件。[下载发布附件](../../releases/latest)
 
 也可以直接把 `zombie-farm-translation.user.js` 拖进浏览器安装，或在 Tampermonkey 里新建脚本后粘贴其内容。
 脚本使用页面上下文（`@sandbox raw`），请使用支持该注入方式的新版 Tampermonkey。
@@ -69,7 +70,7 @@
 ## 常见问题
 
 **看不到翻译图标？**
-确认脚本已启用并刷新游戏页面；脚本只匹配 Zombie Farm Reforged 的 HTTPS 页面。
+打开 Edge 扩展管理页 → Tampermonkey → 详细信息 → **允许用户脚本**（旧版可能显示“开发人员模式”），确认脚本启用后刷新游戏。
 
 **点开了中文，但还有英文？**
 先确认当前处于中文状态，再核对 Tampermonkey 里安装的脚本版本。图片内绘制的文字、第三方登录界面，以及上游新加、词库尚未覆盖的文案可能仍显示英文。

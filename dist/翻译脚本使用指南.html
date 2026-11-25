@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
+  <meta name="zfr-script-version" content="1.2.23">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Zombie Farm Reforged 汉化脚本安装与使用指南。">
   <title>Zombie Farm 汉化脚本使用指南</title>
@@ -26,7 +27,7 @@
 <body>
   <header>
     <h1>Zombie Farm 汉化脚本</h1>
-    <p>版本 v1.2.22 · 游戏界面、提示与 Canvas 文字的中文翻译</p>
+    <p>版本 v1.2.23 · 游戏界面、提示与 Canvas 文字的中文翻译</p>
   </header>
   <main>
     <section>
@@ -38,8 +39,9 @@
     <section>
       <h2>电脑：Edge + Tampermonkey</h2>
       <ol>
-        <li>打开 Tampermonkey 管理面板，进入“实用工具”，在 ZIP 导入处选择 <code>ZFR在线网页版-汉化脚本.zip</code>，确认导入用户脚本。</li>
-        <li>启用“Zombie Farm 汉化”，打开或刷新游戏网页。</li>
+        <li>在 Edge 安装并启用 Tampermonkey，点<a href="https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js">安装最新版汉化</a>，在油猴打开的页面确认安装。</li>
+        <li>已有 ZIP 时，可在 Tampermonkey 管理面板 → 实用工具 → 从 ZIP 导入，选择下载的文件。GitHub 发布附件名为 <code>zombie-farm-translation-only-v1.2.23.zip</code>，本地分发包名为 <code>ZFR在线网页版-汉化脚本.zip</code>。</li>
+        <li>启用“Zombie Farm Reforged 汉化”，打开或刷新游戏网页。</li>
         <li>点击页面的翻译图标切换中文 / 原文；按住图标可拖到不遮挡游戏的位置。选择状态与图标位置都会保存。</li>
       </ol>
       <p>也可以在 Tampermonkey 中新建脚本，将 ZIP 内的 <code>zombie-farm-translation.user.js</code> 内容粘贴保存。脚本使用页面上下文（<code>@sandbox raw</code>），请使用支持该注入方式的新版 Tampermonkey。</p>
@@ -64,7 +66,7 @@
     </section>
     <section>
       <h2>常见问题</h2>
-      <p><strong>没有看到“译”按钮：</strong>检查脚本是否启用，并刷新游戏页面。脚本只匹配 Zombie Farm Reforged 的 HTTPS 页面。</p>
+      <p><strong>找不到翻译开关？</strong>在 Edge 扩展管理页打开 Tampermonkey → 详细信息 → 允许用户脚本，然后启用脚本并刷新游戏。旧版 Edge 可能显示“开发人员模式”。</p>
       <p><strong>点击后仍有英文：</strong>先确认已打开中文状态，再查看 Tampermonkey 中安装的脚本版本。游戏图片内绘制的文字、第三方登录页面和新增词条可能仍显示英文。</p>
       <p><strong>商店中文搜索没有候选：</strong>先进入对应商店分类；联想只搜索当前分类中的商品名称。</p>
     </section>
