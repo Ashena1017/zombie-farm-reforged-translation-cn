@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zombie Farm Reforged 汉化
 // @namespace    local.zombie-farm.translation-only
-// @version      1.2.23
+// @version      1.2.26
 // @description  本项目开源免费，请勿购买。把 Zombie Farm Reforged 的游戏界面翻译成简体中文。交流 QQ 群：1185712984。
 // @homepageURL  https://github.com/Ashena1017/zombie-farm-reforged-translation-cn
 // @match        https://zombiefarmreforged.com/*
@@ -21,7 +21,7 @@
   "use strict";
 
   const KEY = "__ZF_TRANSLATION_ONLY__";
-  const VERSION = "1.2.23";
+  const VERSION = "1.2.26";
   if (window.top !== window.self || window[KEY]) return;
 
   const readSetting = (key) => {
@@ -352,8 +352,11 @@
           originalText(el.closest(".confirm-panel")?.querySelector("h2")) === "Buy a Brain Ticket?") {
         return translate(value.replace(/^Buy Ticket · /, "Buy Brain Ticket · "));
       }
-      // Native listing metadata keeps the seller on a separate line. Protect that
-      // name even when it is also a dictionary term or contains a middle dot.
+      // The detail view puts the price first. Everything after its separator is the player’s name.
+      if (el.matches(".bm-zombie-bg .bm-meta")) {
+        const separator = value.indexOf(" · ");
+        if (separator >= 0) return translate(value.slice(0, separator)) + value.slice(separator);
+      }
       if (el.matches(".bm-list .bm-card .bm-meta")) {
         const listing = /^(Mutated: [^\r\n]+|Requested mutations?: [^\r\n]+)(\r?\n)([\s\S]*)$/.exec(value);
         if (listing) {
@@ -537,6 +540,10 @@
         list.hidden = true;
         input.parentElement.appendChild(list);
         let composing = false, current = -1, matches = [];
+        let accepted = input.value, display = input.value;
+        // When Chinese is re-enabled, keep the original game's active search.
+        const initial = LOCALE_DATA.search.find(entry => entry[0] === accepted);
+        if (initial) input.value = display = translate(accepted);
         const hide = () => { list.hidden = true; current = -1; };
         const selection = () => [
           normalized(originalText(market?.querySelector(".mkt-tabs .mkt-tab.sel"))),
@@ -545,8 +552,9 @@
         const choose = (index) => {
           const item = matches[index];
           if (!item) return;
-          const display = translate(item[0]);
-          input.value = item[0];
+          accepted = item[0];
+          display = translate(accepted);
+          input.value = accepted;
           try { native.call(input, new Event("input", { bubbles: true })); }
           finally { input.value = display; hide(); }
         };
@@ -554,11 +562,11 @@
           if (composing || event?.isComposing) return;
           const q = input.value.trim();
           hide();
-          if (!/[\u3400-\u9fff]/.test(q)) { native.call(input, event); return; }
+          if (!/[\u3400-\u9fff]/.test(q)) { accepted = display = input.value; native.call(input, event); return; }
           const [tab, sub] = selection();
           matches = LOCALE_DATA.search.filter((entry) => entry[1] === tab && entry[2] === sub && translate(entry[0]).includes(q)).slice(0, 30);
           list.replaceChildren();
-          if (!matches.length) { native.call(input, event); return; }
+          if (!matches.length) { accepted = display = input.value; native.call(input, event); return; }
           matches.forEach((entry, i) => {
             const option = document.createElement("button");
             option.type = "button";
@@ -571,32 +579,50 @@
           });
           list.hidden = false;
         };
+        const cancelSuggestions = () => {
+          if (!list.hidden) input.value = display;
+          hide();
+        };
         const keydown = (event) => {
-          if (list.hidden || composing || event.isComposing) return;
+          if (composing || event.isComposing || list.hidden) return;
           if (["ArrowDown", "ArrowUp", "Enter"].includes(event.key)) {
             event.preventDefault(); event.stopImmediatePropagation();
             if (event.key === "Enter") { choose(current < 0 ? 0 : current); return; }
-            current = (current + (event.key === "ArrowDown" ? 1 : -1) + matches.length) % matches.length;
+            const step = event.key === "ArrowDown" ? 1 : -1;
+            current = current < 0 ? (step > 0 ? 0 : matches.length - 1) : (current + step + matches.length) % matches.length;
             [...list.children].forEach((el, i) => el.setAttribute("aria-selected", String(i === current)));
             list.children[current]?.scrollIntoView({ block: "nearest" });
-          } else if (event.key === "Escape") hide();
+          } else if (event.key === "Escape") {
+            event.preventDefault(); event.stopImmediatePropagation(); cancelSuggestions();
+          }
+        };
+        // The game's onkeydown clears the shelf without dispatching an input event.
+        // This listener runs after it. Escape handled by the list never reaches here.
+        const afterNativeKeydown = (event) => {
+          if (event.key === "Escape" && !input.value) accepted = display = "";
         };
         const compositionStart = () => { composing = true; hide(); };
         const compositionEnd = (event) => { composing = false; refresh(event); };
-        const closeOnClick = (event) => { if (!input.parentElement.contains(event.target)) hide(); };
+        const closeOnClick = (event) => {
+          if (event.target.closest(".mkt-tab") && !input.value) accepted = display = "";
+          if (!input.parentElement.contains(event.target)) cancelSuggestions();
+        };
         const wrapper = (event) => refresh(event);
         input.oninput = wrapper;
         input.addEventListener("keydown", keydown, true);
+        input.addEventListener("keydown", afterNativeKeydown);
         input.addEventListener("compositionstart", compositionStart);
         input.addEventListener("compositionend", compositionEnd);
-        input.addEventListener("blur", hide);
+        input.addEventListener("blur", cancelSuggestions);
         market.addEventListener("click", closeOnClick);
         searchBoxes.set(input, () => {
           if (input.oninput === wrapper) input.oninput = native;
           input.removeEventListener("keydown", keydown, true);
+          input.removeEventListener("keydown", afterNativeKeydown);
           input.removeEventListener("compositionstart", compositionStart);
           input.removeEventListener("compositionend", compositionEnd);
-          input.removeEventListener("blur", hide);
+          input.removeEventListener("blur", cancelSuggestions);
+          input.value = accepted;
           market.removeEventListener("click", closeOnClick);
           list.remove();
         });
@@ -661,7 +687,7 @@
         clearInterval(interval);
       });
     }
-    return { originalText, translate, setEnabled, start, hasToggle: () => !!button?.isConnected,
+    return { originalText, originalCanvasText: node => pixiNodes.get(node)?.source ?? node.text, translate, setEnabled, start, hasToggle: () => !!button?.isConnected,
       preferChinese() { if (!hasPreference && !enabled) applyLanguage(true); },
       status: () => ({ enabled, writes, scans, faults, pixiNodes: pixiNodes.size, searchBoxes: searchBoxes.size }) };
   }
@@ -745,9 +771,6 @@
     const clampSavedPosition = () => {
       if (!button.isConnected || !savedPosition) return;
       applyPosition(savedPosition.left, savedPosition.top);
-      const rect = button.getBoundingClientRect();
-      savedPosition = { left: rect.left, top: rect.top };
-      try { localStorage.setItem(positionKey, JSON.stringify(savedPosition)); } catch { /* optional */ }
     };
     window.addEventListener("resize", clampSavedPosition);
     window.visualViewport?.addEventListener("resize", clampSavedPosition);

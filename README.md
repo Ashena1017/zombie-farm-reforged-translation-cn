@@ -2,7 +2,7 @@
 
 把网页游戏 [Zombie Farm Reforged](https://zombiefarmreforged.com/) 的界面翻译成简体中文的 Tampermonkey 用户脚本。
 
-**[安装最新版汉化](https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js)** · 当前公开版本 **1.2.23**
+**[安装最新版汉化](https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js)** · 当前公开版本 **1.2.26**
 
 **本项目开源免费，请勿购买。**
 
@@ -22,8 +22,8 @@
 - **页面与动态提示翻译**：菜单、弹窗、按钮、倒计时、任务、商店说明等持续新增的文案。
 - **Canvas 游戏文字**：战斗与场景里绘制在画布上的文字也会翻译。
 - **属性与说明**：僵尸属性、技能说明、道具效果等。
-- **商店中文搜索联想**：在当前商店分类的搜索框输入中文，选中候选后按商品英文原名执行**原生搜索**。
-- **可拖动翻译图标**：右下角的小图标可拖动到不遮挡游戏的位置，位置会被记住。
+- **商店中文搜索联想**　在当前分类输入中文，用 ↑、↓ 选商品，按回车或直接点选即可筛选货架。候选展开时按 Esc 可取消这次输入，收起后按 Esc 会清空筛选。切换中英文时会保留当前筛选。
+- **可拖动翻译图标**　把右下角的图标拖到顺手的位置即可。横屏转竖屏时图标会留在屏幕内，转回横屏会恢复之前的位置。
 - **默认开启中文**：安装后即为中文。点击图标在中文 / 原文之间切换，选择会被记住。
 
 ## 隐私
