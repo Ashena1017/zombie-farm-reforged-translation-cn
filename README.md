@@ -2,7 +2,7 @@
 
 把网页游戏 [Zombie Farm Reforged](https://zombiefarmreforged.com/) 的界面翻译成简体中文的 Tampermonkey 用户脚本。
 
-**[安装最新版汉化](https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js)** · 当前公开版本 **1.2.26**
+**[安装最新版汉化](https://raw.githubusercontent.com/Ashena1017/zombie-farm-reforged-translation-cn/main/dist/zombie-farm-translation.user.js)** · 当前公开版本 **1.2.27**
 
 **本项目开源免费，请勿购买。**
 
@@ -10,7 +10,7 @@
 
 **交流 QQ 群：1185712984**
 
-从浏览器历史返回游戏后，新出现的提示会继续翻译。鼠标停在队伍或 PvP 防线的僵尸头像上时，会保留你起的名字，陵墓休息提示仍会显示中文。
+陵墓升级按钮现在会写明下一档的基础容量和花费。通关普通无尽第 5 阶奖励的 8 格会计入陵墓顶部显示的总容量。
 
 脚本翻译菜单、提示、倒计时、战斗文字、道具说明，以及画在 Canvas 画布上的文字。
 词库整个装在脚本里，翻译在页面内完成，运行时不调用在线翻译服务。
