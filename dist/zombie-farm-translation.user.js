@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zombie Farm Reforged 汉化
 // @namespace    local.zombie-farm.translation-only
-// @version      1.2.27
+// @version      1.2.28
 // @description  本项目开源免费，请勿购买。把 Zombie Farm Reforged 的游戏界面翻译成简体中文。交流 QQ 群：1185712984。
 // @homepageURL  https://github.com/Ashena1017/zombie-farm-reforged-translation-cn
 // @match        https://zombiefarmreforged.com/*
@@ -21,7 +21,7 @@
   "use strict";
 
   const KEY = "__ZF_TRANSLATION_ONLY__";
-  const VERSION = "1.2.27";
+  const VERSION = "1.2.28";
   if (window.top !== window.self || window[KEY]) return;
 
   const readSetting = (key) => {
@@ -538,6 +538,8 @@
         list.setAttribute("role", "listbox");
         list.setAttribute("aria-label", "商品名称");
         list.hidden = true;
+        // The market pages its shelves on wheel. Let the browser scroll the suggestions here.
+        list.addEventListener("wheel", event => event.stopPropagation(), { passive: true });
         input.parentElement.appendChild(list);
         let composing = false, current = -1, matches = [];
         let accepted = input.value, display = input.value;
